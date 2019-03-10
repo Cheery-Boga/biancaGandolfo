@@ -1,0 +1,54 @@
+//underscoreMap method;
+
+const weapons = ['candlestick', 'lead pipe', 'revolver'];
+const makeBroken = item => console.log(`Broken ${item});
+ _.map(weapons, makeBroken); 
+ 
+ //creating a new _.map function
+ 
+ _.map = function (array, callback) {
+	let storage = [];
+	
+	for (let i=0; i < array.length; i++) {
+	storage.push(callback(array[i], i, array));
+    }
+	return storage;
+}
+
+_.map([1,2,3,4], function(element){
+return element + 1;}) //=>[2,3,4,5];
+
+//"functional programmers don't like loops, we like to use functions (map/each methods) that do the looping for us, so that we don't have to think about it"
+//so we need to translate the for-loop, in the above example, into a for each function
+
+
+_.map = function (array, callback) {
+	let storage = [];
+	
+<!--
+	for (let i=0; i < array.length; i++) {
+	storage.push(callback(array[i], i, array));
+    }
+-->
+
+_.each(array, function(value, index, array){
+    storage.push(callback(value, index, array));  //even though the _.each NEVER returns anything, this stateement on line 179 returns whatever the callback returns should be pushed to our storage array
+})
+	return storage;
+}
+ 
+
+// this _.each completely replaces the for-loop in its entirety! 
+
+//test case returns an array with [2,3,4]:
+
+_.map([1,2,3], function (element) {
+return element + 1; })
+
+
+
+
+
+
+
+
