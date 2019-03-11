@@ -1,0 +1,113 @@
+
+filter takes an array and a callback
+returns a new array that only contain the values that return true from the callback.
+the callback has to return a boolean. So, it needs to return either true or false. If it returns true, it gets added to our array.
+the length of the new array doesn't have to be the same length as the original array. 
+this fiter method is often called the 'truth test'
+
+What happens below the hood is the following code for the _.fiter method:
+
+_.filter = function (array, callback) {
+    // create a new array; 
+    let storage = []; 
+    // loop thru the array; 
+    _.each(arr, function (element, i, array) {   // the reason we don't use _.map, here, is because we want to sort and filter the array with a truthy value. Map will return both                                                 falsies and thruthies onto our storage array
+        if (callback(element, i, array)) {
+            storage.push(element);
+        }
+    })
+    return storage; 
+}
+
+<!-- in the array below, there is a flag. A flag is a property that has true or false as its value.
+
+const videoData = [
+    {
+name: 'Miss Scarlet',
+        present: true,
+        rooms: [
+            {kitchen: false},
+            {ballroom: false},
+            {conservatory: false},
+            {'dining room': false},
+            {'billiard room': false},
+            {library: false}
+        ]
+    },
+    {
+        name: 'Mrs. White',
+        present: false,
+        rooms: [
+            {kitchen: false},
+            {ballroom: false},
+            {conservatory: false},
+            {'dining room': false},
+            {'billiard room': false},
+            {library: false}
+        ]
+    }, 
+    {
+    
+        name: 'Reverand Green',
+        present: true,
+        rooms: [
+            {kitchen: false},
+            {ballroom: false},
+            {conservatory: false},
+            {'dining room': false},
+            {'billiard room': false},
+            {library: false}
+        ]   
+    },
+    {
+    
+        name: 'Rusty',
+        present: false,
+        rooms: [
+            {kitchen: false},
+            {ballroom: false},
+            {conservatory: false},
+            {'dining room': false},
+            {'billiard room': false},
+            {library: false}
+        ]   
+    },
+    {
+    
+       name: 'Professor Plum',
+       present: true,
+       rooms: [
+            {kitchen: false},
+            {ballroom: false},
+            {conservatory: false},
+            {'dining room': false},
+            {'billiard room': false},
+            {library: false}
+          
+      ]
+    }         
+]
+
+// The great thing about using callback functions is that you can name the argument anything you want for better readibility.         
+        
+_.filter(videoData, function(suspectsObject){
+       return suspectsObject.present; 
+       
+       });
+        
+    // We expect an array with the suspectsObjects that hold a true value for the "present" property (key). ===> (3) [{…}, {…}, {…}]
+    
+0: {name: "Miss Scarlet", present: true, rooms: Array(6)}
+1: {name: "Reverand Green", present: true, rooms: Array(6)}
+2: {name: "Professor Plum", present: true, rooms: Array(6)}
+length: 3
+        
+        -->
+        
+        
+         
+        
+        
+        
+        
+         
